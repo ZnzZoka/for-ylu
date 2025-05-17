@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mau Jadi Pacar Aku?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            margin: 0;
+            color: #5d001e;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Dancing Script', cursive;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 30px auto;
+            transform: scale(0.95);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .container:hover {
+            transform: scale(1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s;
+            font-weight: bold;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+            animation: pulseYes 2s infinite;
+        }
+        
+        @keyframes pulseYes {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+        
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+            animation: shake 0.5s infinite alternate;
+        }
+        
+        @keyframes shake {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-5px) rotate(-5deg); }
+            50% { transform: translateX(5px) rotate(5deg); }
+            75% { transform: translateX(-5px) rotate(-5deg); }
+            100% { transform: translateX(5px) rotate(5deg); }
+        }
+        
+        .heart {
+            font-size: 120px;
+            color: #d81b60;
+            margin: 30px 0;
+            animation: beat 0.8s infinite alternate, float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(216, 27, 96, 0.6);
+            display: inline-block;
+        }
+        
+        @keyframes beat {
+            to { transform: scale(1.3); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hidden {
+            display: none;
+            animation: fadeOut 0.5s;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        .show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .flowers {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0;
+            animation: fall 10s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 0;
+                transform: rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+                transform: rotate(360deg) scale(1);
+            }
+        }
+        
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart-particle {
+            position: absolute;
+            font-size: 20px;
+            color: #ff4081;
+            animation: floatUp 4s linear forwards;
+            opacity: 0;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        .message {
+            font-size: 1.2em;
+            margin: 20px 0;
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: gold;
+            pointer-events: none;
+            animation: sparkle 1s ease-out forwards;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="flowers" id="flowers"></div>
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Halaman Utama -->
+    <div class="container" id="mainPage">
+        <h1>Mau ga jadi pacar aku? 💖</h1>
+        <div class="message">Aku benar-benar serius nih...</div>
+        <div class="button-container">
+            <button id="yesBtn">Iya 💝</button>
+            <button id="noBtn">Tidak 😢</button>
+        </div>
+    </div>
+
+    <!-- Halaman Setelah Memilih Iya -->
+    <div class="container hidden" id="yesPage">
+        <h1>Terima kasih sayang! ❤️</h1>
+        <div class="heart">❤️</div>
+        <div class="message">Aku janji akan membuatmu bahagia selalu!</div>
+        <div class="button-container">
+            <button id="backFromYesBtn">Kembali ke Awal</button>
+        </div>
+    </div>
+
+    <!-- Halaman Setelah Memilih Tidak -->
+    <div class="container hidden" id="noPage">
+        <h1>Serius? 😢</h1>
+        <div class="message">Aku benar-benar menyukaimu...</div>
+        <div class="button-container">
+            <button id="yesAfterNoBtn">Iya, maaf</button>
+            <button id="noAfterNoBtn">Tidak, aku bercanda!</button>
+        </div>
+    </div>
+
+    <!-- Audio untuk musik romantis -->
+    <audio id="romanticMusic" autoplay>
+        <source src="https://g.top4top.io/m_3424c48600.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Script untuk confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Elemen-elemen halaman
+        const mainPage = document.getElementById('mainPage');
+        const yesPage = document.getElementById('yesPage');
+        const noPage = document.getElementById('noPage');
+        const romanticMusic = document.getElementById('romanticMusic');
+        const flowersContainer = document.getElementById('flowers');
+        const heartsContainer = document.getElementById('hearts');
+        
+        // Tombol-tombol
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const backFromYesBtn = document.getElementById('backFromYesBtn');
+        const yesAfterNoBtn = document.getElementById('yesAfterNoBtn');
+        const noAfterNoBtn = document.getElementById('noAfterNoBtn');
+
+        // Fungsi untuk menampilkan halaman tertentu dan menyembunyikan yang lain
+        function showPage(pageToShow) {
+            // Animasi fade out untuk semua halaman
+            document.querySelectorAll('.container').forEach(page => {
+                page.classList.remove('show');
+                page.classList.add('hidden');
+            });
+            
+            // Animasi fade in untuk halaman yang dipilih
+            setTimeout(() => {
+                pageToShow.classList.remove('hidden');
+                pageToShow.classList.add('show');
+            }, 500);
+        }
+
+        // Event listeners
+        yesBtn.addEventListener('click', () => {
+            // Memainkan musik romantis
+            romanticMusic.play();
+            
+            // Menampilkan confetti
+            confetti({
+                particleCount: 200,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#ff0000', '#ff69b4', '#ff1493', '#c71585', '#ff4081'],
+                shapes: ['circle', 'heart']
+            });
+            
+            // Membuat bunga jatuh
+            createFlowers();
+            
+            // Membuat hati melayang
+            startHeartsAnimation();
+            
+            showPage(yesPage);
+        });
+
+        noBtn.addEventListener('click', () => {
+            showPage(noPage);
+        });
+        
+        backFromYesBtn.addEventListener('click', () => {
+            romanticMusic.pause();
+            romanticMusic.currentTime = 0;
+            stopHeartsAnimation();
+            showPage(mainPage);
+        });
+        
+        yesAfterNoBtn.addEventListener('click', () => showPage(mainPage));
+        noAfterNoBtn.addEventListener('click', () => showPage(mainPage));
+
+        // Animasi untuk tombol Tidak di halaman utama
+        noBtn.addEventListener('mouseover', () => {
+            // Membuat tombol "Tidak" bergerak acak saat dihover
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*20-10}deg)`;
+        });
+
+        noBtn.addEventListener('mouseout', () => {
+            // Mengembalikan tombol ke posisi semula saat tidak dihover
+            noBtn.style.transform = 'translate(0, 0) rotate(0deg)';
+        });
+
+        // Fungsi untuk membuat bunga jatuh
+        function createFlowers() {
+            flowersContainer.innerHTML = '';
+            const flowerEmojis = ['🌸', '🌹', '💐', '🌺', '🌷', '🏵️', '🥀', '🌻'];
+            
+            for (let i = 0; i < 30; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.innerHTML = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                flower.style.animationDelay = Math.random() * 5 + 's';
+                flower.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                flowersContainer.appendChild(flower);
+            }
+        }
+
+        // Fungsi untuk membuat hati melayang
+        let heartsInterval;
+        function startHeartsAnimation() {
+            clearInterval(heartsInterval);
+            heartsContainer.innerHTML = '';
+            
+            heartsInterval = setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = '100%';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heartsContainer.appendChild(heart);
+                
+                // Hapus elemen setelah animasi selesai
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }, 300);
+        }
+        
+        function stopHeartsAnimation() {
+            clearInterval(heartsInterval);
+            heartsContainer.innerHTML = '';
+        }
+
+        // Membuat bunga jatuh di halaman utama
+        createFlowers();
+        
+        // Animasi sparkle ketika mengklik tombol
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+        
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+        
+        // Animasi teks berkedip di halaman utama
+        const messages = [
+            "Aku benar-benar serius nih...",
+            "Aku suka sama kamu!",
+            "Jadilah pacarku ya?",
+            "Kamu spesial banget buat aku",
+            "Aku pengen selalu sama kamu"
+        ];
+        
+        const messageElement = document.querySelector('#mainPage .message');
+        let currentMessage = 0;
+        
+        setInterval(() => {
+            currentMessage = (currentMessage + 1) % messages.length;
+            messageElement.style.animation = 'none';
+            void messageElement.offsetWidth; // Trigger reflow
+            messageElement.style.animation = 'slideIn 1s ease-out';
+            messageElement.textContent = messages[currentMessage];
+        }, 3000);
+    </script>
+</body>
+</html>
